@@ -2,7 +2,7 @@ async function fetchInitialContent () {
     const INITIAL_CONTENT_URL = "https://flipboard.com/@raimoseero/feed-nii8kd0sz.rss";
     const response = await getUrlContent(INITIAL_CONTENT_URL);
     const data = await response.text();
-    console.log(data);
+    const xmlDocument = parseXml(data);
 }
 
 async function getUrlContent (url) {
@@ -10,6 +10,12 @@ async function getUrlContent (url) {
     queryStringParameters.append("url", url);
     const response = await fetch("/content?" + queryStringParameters);
     return response;
+}
+
+function parseXml (xmlString) {
+    const parser = new DOMParser();
+    const document = parser.parseFromString(xmlString, "application/xml");
+    return document;
 }
 
 fetchInitialContent();
