@@ -21,13 +21,35 @@ function parseXml (xmlString) {
 
 function generateNewsArticles (xmlDocument) {
     const newsItems = xmlDocument.getElementsByTagName("item");
-    console.log(xmlDocument);
     
     for (let i = 0; i < newsItems?.length; i++) {
-        const newsItem = newsItems[i];
-        const title = newsItem.getElementsByTagName("title")?.[0];
-        console.log(title);
+        const newsItemData = newsItems[i];
+        const newsItemElement = generateNewsItemElement(newsItemData);
+        document.body.appendChild(newsItemElement);
     }
+}
+
+function generateNewsItemElement (newsItemData) {
+    const title = newsItemData.getElementsByTagName("title")?.[0];
+    const titleText = title.textContent || title.innerText || "No Title";
+
+    const description  =newsItemData.getElementsByTagName("description")?.[0];
+    const descriptionText = description.textContent || description.innerText || "No Description";
+
+    const newsItemContainer = document.createElement("li");
+    newsItemContainer.classList.add("news-item");
+
+    const newsItemTitle = document.createElement("h2");
+    newsItemTitle.classList.add("news-item-title");
+    newsItemTitle.innerText = titleText;
+
+    const newsItemDescription = document.createElement("p");
+    newsItemDescription.classList.add("news-item-description");
+    newsItemDescription.innerText = descriptionText;
+
+    newsItemContainer.appendChild(newsItemTitle);
+    newsItemContainer.appendChild(newsItemDescription);
+    return newsItemContainer;
 }
 
 
