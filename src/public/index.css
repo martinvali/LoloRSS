@@ -3,4 +3,56 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+    font-size: 62.5%;
+}
+
+html {
+    --news-item-text-padding: 1.5rem;
+}
+
+
+.news-items-container {
+    padding: 0 1.6rem;
+}
+.news-items {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+}
+
+.news-item {
+    list-style: none;
+    border: 1px solid #EFF5FF;
+    border-radius: 5px;
+    padding-bottom: 1rem;
+}
+
+.news-item-image {
+    width: 100%;
+}
+
+.news-item-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    padding: 0 var(--news-item-text-padding);
+    padding-top: 1rem;
+}
+
+.news-item-description {
+    font-size: 1rem;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; 
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+    padding: 0 var(--news-item-text-padding);
 }

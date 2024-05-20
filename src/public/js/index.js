@@ -21,17 +21,18 @@ function parseXml (xmlString) {
 
 function generateNewsArticles (xmlDocument) {
     const newsItems = xmlDocument.getElementsByTagName("item");
-    
+    const newsItemsContainer = document.querySelector(".news-items");
+
     for (let i = 0; i < newsItems?.length; i++) {
         const newsItemData = newsItems[i];
         const newsItemElement = generateNewsItemElement(newsItemData);
-        document.body.appendChild(newsItemElement);
+        newsItemsContainer.appendChild(newsItemElement);
     }
 }
 
 function generateNewsItemElement (newsItemData) {
     const image = newsItemData.getElementsByTagName("media:content")?.[0];
-    const imageSrc = image?.getAttribute("url")|| "";
+    const imageSrc = image?.getAttribute("url") || "";
 
     const title = newsItemData.getElementsByTagName("title")?.[0];
     const titleText = title.textContent || title.innerText || "No Title";
