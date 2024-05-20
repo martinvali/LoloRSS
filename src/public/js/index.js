@@ -28,6 +28,8 @@ function generateNewsArticles (xmlDocument) {
         const newsItemElement = generateNewsItemElement(newsItemData);
         newsItemsContainer.appendChild(newsItemElement);
     }
+
+    document.body.classList.remove("loading");
 }
 
 function generateNewsItemElement (newsItemData) {

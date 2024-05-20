@@ -58,6 +58,11 @@ html {
 }
 
 .skeleton {
+    display: none;
+}
+
+.loading .skeleton {
+    display: block;
     background: linear-gradient(
       90deg,
       hsl(210, 15%, 88%),
