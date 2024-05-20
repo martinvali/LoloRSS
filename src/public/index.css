@@ -32,8 +32,17 @@ html {
     width: 100%;
 }
 
+.news-item-date {
+    padding: 0 var(--news-item-text-padding);
+    font-size: 1rem;
+    color: #62C1BB;
+    font-weight: 500;
+    padding-top: 1rem;
+}
+
 .news-item-title {
     font-size: 1.5rem;
+    line-height: 1.4;
     font-weight: 500;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -42,7 +51,8 @@ html {
     line-clamp: 3;
     -webkit-box-orient: vertical;
     padding: 0 var(--news-item-text-padding);
-    padding-top: 1rem;
+    padding-top: 0.2rem;
+    margin-bottom: 0.5rem;
 }
 
 .news-item-description {
@@ -51,8 +61,8 @@ html {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 5; 
-    line-clamp: 5;
+    -webkit-line-clamp: 4; 
+    line-clamp: 4;
     -webkit-box-orient: vertical;
     padding: 0 var(--news-item-text-padding);
 }

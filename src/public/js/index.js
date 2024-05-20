@@ -33,6 +33,11 @@ function generateNewsArticles (xmlDocument) {
 }
 
 function generateNewsItemElement (newsItemData) {
+    const DATE_START_INDEX = 5;
+    const DATE_END_INDEX = 16;
+    const date = newsItemData.getElementsByTagName("pubDate")?.[0];
+    const dateText = (date.textContent || date.innerText).slice(DATE_START_INDEX, DATE_END_INDEX);
+
     const image = newsItemData.getElementsByTagName("media:content")?.[0];
     const imageSrc = image?.getAttribute("url") || "";
 
@@ -44,6 +49,10 @@ function generateNewsItemElement (newsItemData) {
 
     const newsItemContainer = document.createElement("li");
     newsItemContainer.classList.add("news-item");
+
+    const newsItemDate = document.createElement("p");
+    newsItemDate.classList.add("news-item-date");
+    newsItemDate.innerText = dateText;
 
     const newsItemTitle = document.createElement("h2");
     newsItemTitle.classList.add("news-item-title");
@@ -58,6 +67,7 @@ function generateNewsItemElement (newsItemData) {
     newsItemImage.classList.add("news-item-image");
 
     newsItemContainer.appendChild(newsItemImage);
+    newsItemContainer.appendChild(newsItemDate);
     newsItemContainer.appendChild(newsItemTitle);
     newsItemContainer.appendChild(newsItemDescription);
     return newsItemContainer;
