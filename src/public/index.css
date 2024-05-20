@@ -11,14 +11,13 @@ html {
     --news-item-text-padding: 1.5rem;
 }
 
-
 .news-items-container {
     padding: 0 1.6rem;
 }
 .news-items {
     display: grid;
     grid-template-columns: 1fr;
-    row-gap: 1rem;
+    row-gap: 2rem;
 }
 
 .news-item {
@@ -26,6 +25,7 @@ html {
     border: 1px solid #EFF5FF;
     border-radius: 5px;
     padding-bottom: 1rem;
+    cursor: pointer;
 }
 
 .news-item-image {
@@ -56,3 +56,26 @@ html {
     -webkit-box-orient: vertical;
     padding: 0 var(--news-item-text-padding);
 }
+
+.skeleton {
+    background: linear-gradient(
+      90deg,
+      hsl(210, 15%, 88%),
+      hsl(210, 15%, 95%),
+      hsl(210, 15%, 88%)
+    );
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+    border-radius: 5px;
+    width: 100%;
+    height: 200px;
+}  
+
+@keyframes skeleton {
+    from {
+      background-position: -100% 0;
+    }
+    to {
+      background-position: 100% 0;
+    }
+  }
