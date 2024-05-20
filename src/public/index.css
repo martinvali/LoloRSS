@@ -71,6 +71,20 @@ html {
     height: 200px;
 }  
 
+@media only screen and (min-width: 600px) {
+    .news-items {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .news-items {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+}
+
 @keyframes skeleton {
     from {
       background-position: -100% 0;
