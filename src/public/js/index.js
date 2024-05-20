@@ -1,3 +1,17 @@
+function initializeWebsite() {
+    fetchInitialContent();
+    document.querySelector(".news-items")?.addEventListener("click", newsItemsClicked);
+}
+
+
+function newsItemsClicked (e) {
+    const target = e?.target;
+    const newsItem = target?.closest(".news-item");
+    if(!newsItem) return;
+
+    const url = newsItem.dataset.url;
+}
+
 async function fetchInitialContent () {
     const INITIAL_CONTENT_URL = "https://flipboard.com/@raimoseero/feed-nii8kd0sz.rss";
     const response = await getUrlContent(INITIAL_CONTENT_URL);
@@ -33,10 +47,14 @@ function generateNewsArticles (xmlDocument) {
 }
 
 function generateNewsItemElement (newsItemData) {
+    console.log(newsItemData);
     const DATE_START_INDEX = 5;
     const DATE_END_INDEX = 16;
     const date = newsItemData.getElementsByTagName("pubDate")?.[0];
     const dateText = (date.textContent || date.innerText).slice(DATE_START_INDEX, DATE_END_INDEX);
+
+    const link = newsItemData.getElementsByTagName("link")?.[0];
+    const linkUrl = link.textContent || link.innerText || "";
 
     const image = newsItemData.getElementsByTagName("media:content")?.[0];
     const imageSrc = image?.getAttribute("url") || "";
@@ -49,6 +67,7 @@ function generateNewsItemElement (newsItemData) {
 
     const newsItemContainer = document.createElement("li");
     newsItemContainer.classList.add("news-item");
+    newsItemContainer.dataset.url = linkUrl;
 
     const newsItemDate = document.createElement("p");
     newsItemDate.classList.add("news-item-date");
@@ -73,5 +92,4 @@ function generateNewsItemElement (newsItemData) {
     return newsItemContainer;
 }
 
-
-fetchInitialContent();
+initializeWebsite();
