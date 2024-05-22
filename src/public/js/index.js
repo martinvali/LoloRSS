@@ -10,6 +10,7 @@ function newsItemsClicked (e) {
     if(!newsItem) return;
 
     const url = newsItem.dataset.url;
+    freeNewsItemFromClutter(url);
     openNewsItemModule();
 }
 
@@ -29,6 +30,15 @@ async function getUrlContent (url) {
     const queryStringParameters = new URLSearchParams();
     queryStringParameters.append("url", url);
     const response = await fetch("/content?" + queryStringParameters);
+    return response;
+}
+
+async function freeNewsItemFromClutter (url) {
+    const queryStringParameters = new URLSearchParams();
+    queryStringParameters.append("url", url);
+    console.log("FETCH");
+    const response = await fetch("/webparser?" + queryStringParameters);
+    console.log(response);
     return response;
 }
 
