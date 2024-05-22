@@ -4,18 +4,24 @@ function initializeWebsite() {
 }
 
 
-function newsItemsClicked (e) {
+async function newsItemsClicked (e) {
     const target = e?.target;
     const newsItem = target?.closest(".news-item");
     if(!newsItem) return;
 
     const url = newsItem.dataset.url;
-    freeNewsItemFromClutter(url);
     openNewsItemModule();
+    const data = await freeNewsItemFromClutter(url);
+    addNewsItemModuleData(data);
 }
 
 function openNewsItemModule () {
     document.querySelector(".news-item-module").classList.add("open", "loading");
+}
+
+function addNewsItemModuleData (data) {
+    const content = data?.content;
+    document.querySelector(".news-item-module").innerHTML = content;
 }
 
 async function fetchInitialContent () {
@@ -36,10 +42,10 @@ async function getUrlContent (url) {
 async function freeNewsItemFromClutter (url) {
     const queryStringParameters = new URLSearchParams();
     queryStringParameters.append("url", url);
-    console.log("FETCH");
+
     const response = await fetch("/webparser?" + queryStringParameters);
-    console.log(response);
-    return response;
+    const data = await response.json();
+    return data;
 }
 
 function parseXml (xmlString) {
