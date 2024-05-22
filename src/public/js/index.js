@@ -10,6 +10,11 @@ function newsItemsClicked (e) {
     if(!newsItem) return;
 
     const url = newsItem.dataset.url;
+    openNewsItemModule();
+}
+
+function openNewsItemModule () {
+    document.querySelector(".news-item-module").classList.add("open", "loading");
 }
 
 async function fetchInitialContent () {

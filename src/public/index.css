@@ -11,6 +11,25 @@ html {
     --news-item-text-padding: 1.5rem;
 }
 
+.news-item-module {
+    visibility: hidden;    
+    position: absolute;
+    width: 90%;
+    height: 200px;
+    background-color: white;
+    border: 1px solid #EFF5FF;
+    border-radius: 5px;
+    top: -200%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: top 0.2s ease;
+}
+
+.news-item-module.open {
+    visibility: visible;
+    top: 200px;
+}
+
 .max-width-container {
     max-width: 1200px;
     margin: 0 auto;
