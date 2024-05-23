@@ -46,9 +46,19 @@ html {
     font-size: 1.2rem !important;
 }
 
-.news-item-module img {
-    width: 100% !important;
+.news-item-module .module-close-icon {
+    width: 2rem;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-bottom: 0.5rem;
 }
+
+.news-item-module img {
+    width: 100%;
+}
+
+
 
 .news-item-module-image {
     border-radius: 5px;
