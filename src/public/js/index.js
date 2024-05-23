@@ -16,7 +16,8 @@ async function newsItemsClicked (e) {
 }
 
 function openNewsItemModule () {
-    document.querySelector(".news-item-module").classList.add("open", "loading");
+    document.querySelector(".module-container").classList.add("open", "loading");
+    document.body.style.overflowY = "hidden";
 }
 
 function addNewsItemModuleData (data) {

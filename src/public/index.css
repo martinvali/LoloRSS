@@ -11,6 +11,22 @@ html {
     --news-item-text-padding: 1.5rem;
 }
 
+.module-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(2px);
+    visibility: hidden;
+}
+
+.module-container.open {
+    visibility: visible;
+}
+
 .news-item-module {
     visibility: hidden;    
     position: absolute;
@@ -31,7 +47,7 @@ html {
     width: 100%;
 }
 
-.news-item-module.open {
+.module-container.open .news-item-module {
     visibility: visible;
     top: 200px;
 }
