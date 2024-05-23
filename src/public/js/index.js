@@ -21,7 +21,12 @@ function openNewsItemModule () {
 
 function addNewsItemModuleData (data) {
     const content = data?.content;
-    document.querySelector(".news-item-module").innerHTML = content;
+    const leadImageUrl = data?.lead_image_url;
+
+    const image = document.querySelector(".news-item-module-image");
+    image.src = leadImageUrl;
+    image.classList.remove("skeleton");
+    document.querySelector(".news-item-module").insertAdjacentHTML("beforeend", content);
 }
 
 async function fetchInitialContent () {
