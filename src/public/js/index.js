@@ -33,7 +33,7 @@ function addNewsItemModuleData (data) {
     const leadImageUrl = data?.lead_image_url;
     const image = document.querySelector(".news-item-module-image");
     image.src = leadImageUrl;
-
+    console.log(data);
     document.querySelector(".module-container").classList.remove("loading");
     document.querySelector(".news-item-module-content").innerHTML = content;
 }
@@ -89,7 +89,6 @@ function generateNewsArticles (xmlDocument) {
 }
 
 function generateNewsItemElement (newsItemData) {
-    console.log(newsItemData);
     const DATE_START_INDEX = 5;
     const DATE_END_INDEX = 16;
     const date = newsItemData.getElementsByTagName("pubDate")?.[0];
