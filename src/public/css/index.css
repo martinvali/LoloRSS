@@ -1,15 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-    overflow-x: hidden;
-    font-size: 62.5%;
-}
-
-html {
-    --news-item-text-padding: 1.5rem;
-}
 
 .module-container {
     position: fixed;
@@ -149,20 +137,6 @@ html {
     width: 100%;
     height: 200px;
 }  
-
-@media only screen and (min-width: 600px) {
-    .news-items {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-    }
-}
-
-@media only screen and (min-width: 1000px) {
-    .news-items {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-    }
-}
 
 @keyframes skeleton {
     from {
