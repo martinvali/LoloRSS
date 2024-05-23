@@ -1,4 +1,3 @@
-
 .module-container {
     position: fixed;
     top: 0;
@@ -28,6 +27,7 @@
     transform: translateX(-50%);
     transition: top 0.2s ease;
     padding: var(--news-item-text-padding);
+    overflow-y: scroll;
 }
 
 .news-item-module * {
@@ -55,6 +55,18 @@
 .news-item-module-image {
     border-radius: 5px;
     width: 100%;
+}
+
+.news-item-module .skeleton {
+    display: none;
+}
+
+.module-container.loading .news-item-module-image {
+    display: none;
+}
+
+.module-container.loading .skeleton {
+    display: block;
 }
 
 .module-container.open .news-item-module {

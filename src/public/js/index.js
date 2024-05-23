@@ -6,8 +6,8 @@ function initializeWebsite() {
 
 
 function moduleCloseButtonClicked (e) {
-    console.log("HEY");
     toggleNewsItemModuleclasses(false);
+    removeNewsItemModuleData();
 }
 
 async function newsItemsClicked (e) {
@@ -31,11 +31,18 @@ function toggleNewsItemModuleclasses (addClass) {
 function addNewsItemModuleData (data) {
     const content = data?.content;
     const leadImageUrl = data?.lead_image_url;
-
     const image = document.querySelector(".news-item-module-image");
     image.src = leadImageUrl;
-    image.classList.remove("skeleton");
-    document.querySelector(".news-item-module").insertAdjacentHTML("beforeend", content);
+
+    document.querySelector(".module-container").classList.remove("loading");
+    document.querySelector(".news-item-module-content").innerHTML = content;
+}
+
+function removeNewsItemModuleData () {
+    const image = document.querySelector(".news-item-module-image");
+    image.classList.add("hidden");
+    document.querySelector(".news-item-module-content").innerHTML = "";
+
 }
 
 async function fetchInitialContent () {
