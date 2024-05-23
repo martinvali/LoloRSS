@@ -42,6 +42,14 @@ html {
     padding: var(--news-item-text-padding);
 }
 
+.news-item-module * {
+    font-size: 1.2rem !important;
+}
+
+.news-item-module img {
+    width: 100% !important;
+}
+
 .news-item-module-image {
     border-radius: 5px;
     width: 100%;
