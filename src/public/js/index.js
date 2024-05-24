@@ -8,6 +8,7 @@ const allNewsItems = [];
 function initializeWebsite() {
     fetchInitialContent();
     document.querySelector(".news-items")?.addEventListener("click", newsItemsClicked);
+    document.querySelector(".filter-categories-container").addEventListener("change", filterCategoriesClicked);
 }
 
 async function newsItemsClicked (e) {
@@ -21,6 +22,19 @@ async function newsItemsClicked (e) {
     modal.showContent(data);
 }
 
+function filterCategoriesClicked (e) {
+    if(!e.target.type === "checkbox") return;
+    
+    const target = e?.target;
+    const category = target?.value;
+    const isChecked = target?.checked;
+    
+    for (const newsItem of allNewsItems) {
+        console.log(newsItem);
+        if(!newsItem?.categories?.includes(category)) continue;
+        newsItem.setVisibilityTo(isChecked);
+    }
+}
 
 async function fetchInitialContent () {
     const INITIAL_CONTENT_URL = "https://flipboard.com/@raimoseero/feed-nii8kd0sz.rss";
@@ -68,6 +82,7 @@ function generateNewsArticles (xmlDocument) {
 
 function generateCategoriesFilters () {
     const categories = new Set(allNewsItems.flatMap((newsItem) => newsItem.categories));
+    categories.add("Other");
     const categoriesContainer = document.querySelector(".filter-categories-container");
 
     for (const category of categories) {

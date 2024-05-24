@@ -63,6 +63,8 @@ export default class NewsItem {
 
 
     #getNewsItemCategories (data) {
-        return Array.from(data.getElementsByTagName("category")).map((category) => category.textContent).filter((category) => category !== "");
+        const categories = Array.from(data.getElementsByTagName("category")).map((category) => category.textContent).filter((category) => category !== "");
+        if(categories.length !== 0) return categories;
+        return ["Other"];
     }
 }

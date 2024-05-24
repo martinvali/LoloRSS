@@ -4,6 +4,11 @@
     border-radius: 5px;
     padding-bottom: 1.5rem;
     cursor: pointer;
+    display: none;
+}
+
+.news-item.visible {
+    display: block;
 }
 
 .news-item-image {
