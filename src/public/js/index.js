@@ -1,13 +1,11 @@
+import PopupModal from "./components/popupModal.js";
+
+const modalContainer = document.querySelector(".module-container");
+const modal = new PopupModal(modalContainer);
+
 function initializeWebsite() {
     fetchInitialContent();
     document.querySelector(".news-items")?.addEventListener("click", newsItemsClicked);
-    document.querySelector(".news-item-module-close-button").addEventListener("click", moduleCloseButtonClicked);
-}
-
-
-function moduleCloseButtonClicked (e) {
-    toggleNewsItemModuleclasses(false);
-    removeNewsItemModuleData();
 }
 
 async function newsItemsClicked (e) {
@@ -16,34 +14,11 @@ async function newsItemsClicked (e) {
     if(!newsItem) return;
 
     const url = newsItem.dataset.url;
-    toggleNewsItemModuleclasses(true);
+    modal.showLoading(url);
     const data = await freeNewsItemFromClutter(url);
-    addNewsItemModuleData(data);
+    modal.showContent(data);
 }
 
-function toggleNewsItemModuleclasses (addClass) {
-    const newsItemModule = document.querySelector(".module-container");
-    const CLASSES_TO_TOGGLE = ["loading", "open"];
-
-    CLASSES_TO_TOGGLE.forEach((className) => newsItemModule.classList.toggle(className, addClass));
-}
-
-function addNewsItemModuleData (data) {
-    const content = data?.content;
-    const leadImageUrl = data?.lead_image_url;
-    const image = document.querySelector(".news-item-module-image");
-    image.src = leadImageUrl;
-    console.log(data);
-    document.querySelector(".module-container").classList.remove("loading");
-    document.querySelector(".news-item-module-content").innerHTML = content;
-}
-
-function removeNewsItemModuleData () {
-    const image = document.querySelector(".news-item-module-image");
-    image.classList.add("hidden");
-    document.querySelector(".news-item-module-content").innerHTML = "";
-
-}
 
 async function fetchInitialContent () {
     const INITIAL_CONTENT_URL = "https://flipboard.com/@raimoseero/feed-nii8kd0sz.rss";
@@ -78,16 +53,14 @@ function parseXml (xmlString) {
 function generateNewsArticles (xmlDocument) {
     const newsItems = xmlDocument.getElementsByTagName("item");
     const newsItemsContainer = document.querySelector(".news-items");
-
     for (let i = 0; i < newsItems?.length; i++) {
         const newsItemData = newsItems[i];
-        console.log(newsItemData);
         const newsItemElement = generateNewsItemElement(newsItemData);
         newsItemsContainer.appendChild(newsItemElement);
     }
-
     document.body.classList.remove("loading");
 }
+
 
 function generateNewsItemElement (newsItemData) {
     const DATE_START_INDEX = 5;
