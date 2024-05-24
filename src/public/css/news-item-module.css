@@ -34,10 +34,12 @@
     font-size: 1.2rem;
 }
 
+.news-item-module h2:not(.news-item-module-heading),
 .news-item-module h3,
 .news-item-module h4,
 .news-item-module h5,
-.news-item-module h6 {
+.news-item-module h6,
+.news-item-module p:has(strong) {
     margin-top: 1rem;
     margin-bottom: 1rem;
     font-size: 1.4rem;
@@ -62,6 +64,7 @@
     width: 100%;
     margin-bottom: 1rem;
     margin-top: 1rem;
+    border-radius: 5px;
 }
 
 .news-item-module-image {
