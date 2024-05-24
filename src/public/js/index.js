@@ -81,6 +81,7 @@ function generateNewsArticles (xmlDocument) {
 
     for (let i = 0; i < newsItems?.length; i++) {
         const newsItemData = newsItems[i];
+        console.log(newsItemData);
         const newsItemElement = generateNewsItemElement(newsItemData);
         newsItemsContainer.appendChild(newsItemElement);
     }
@@ -98,7 +99,7 @@ function generateNewsItemElement (newsItemData) {
     const linkUrl = link.textContent || link.innerText || "";
 
     const image = newsItemData.getElementsByTagName("media:content")?.[0];
-    const imageSrc = image?.getAttribute("url") || "";
+    const imageSrc = image?.getAttribute("url") || "/images/not_available.svg";
 
     const title = newsItemData.getElementsByTagName("title")?.[0];
     const titleText = title.textContent || title.innerText || "No Title";
