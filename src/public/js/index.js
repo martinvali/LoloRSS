@@ -34,6 +34,7 @@ function filterCategoriesClicked (e) {
     
     allFilters[category] = isChecked;
 
+
     for (const newsItem of allNewsItems) {
         if(newsItem?.categories?.every((category) => allFilters[category] === false)) newsItem.setVisibilityTo(false);
         else newsItem.setVisibilityTo(true);
@@ -76,9 +77,13 @@ function generateNewsArticles (xmlDocument) {
     for (let i = 0; i < newsItems?.length; i++) {
         const newsItemData = newsItems[i];
         const newsItem = new NewsItem(newsItemData);
-        const newsItemHTML = newsItem.getHTMLElement();
-        newsItemsContainer.appendChild(newsItemHTML);
         allNewsItems.push(newsItem);
+    }
+
+    allNewsItems.sort((a, b) => b.date - a.date);
+
+    for (const newsItem of allNewsItems) {
+        document.body.appendChild(newsItem.getHTMLElement());
     }
     document.body.classList.remove("loading");
     generateCategoriesFilters();

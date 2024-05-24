@@ -1,10 +1,12 @@
 export default class NewsItem {
     categories;
+    date;
     #HTMLElement;
     
     constructor (data) {
         this.#HTMLElement =  this.#generateNewsItemHTML(data);
         this.categories = this.#getNewsItemCategories(data);
+        this.date = this.#getNewsItemDate(data);
         this.setVisibilityTo(true);
     }
 
@@ -61,6 +63,10 @@ export default class NewsItem {
         return newsItemContainer;
     }
 
+    #getNewsItemDate (data) {
+        const date = data.getElementsByTagName("pubDate")?.[0].textContent;
+        return new Date(date);
+    }
 
     #getNewsItemCategories (data) {
         const categories = Array.from(data.getElementsByTagName("category")).map((category) => category.textContent).filter((category) => category !== "");
