@@ -20,6 +20,8 @@ async function newsItemsClicked (e) {
     const url = newsItem.dataset.url;
     modal.showLoading(url);
     const data = await freeNewsItemFromClutter(url);
+
+    console.log(data);
     modal.showContent(data);
 }
 

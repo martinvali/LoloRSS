@@ -2,11 +2,14 @@ export default class PopupModal {
     #container;
     #mainImage;
     #content;
+    #mainHeading;
 
     constructor (container) {
         this.#container = container;
         this.#mainImage = container.querySelector(".news-item-module-image");
         this.#content = container.querySelector(".news-item-module-content");
+        this.#mainHeading = container.querySelector(".news-item-module-heading");
+
         container.querySelector(".news-item-module-close-button")?.addEventListener("click", this.#hideModule.bind(this));
         this.#container.addEventListener("click", this.#containerClicked.bind(this));
     }
@@ -18,18 +21,19 @@ export default class PopupModal {
 
 
     showContent (data) {
-        console.log(data);
         if(data.error) return this.#showErrorContent();
-        const content = data?.content;
-        const leadImageUrl = data?.lead_image_url || "/images/not_available.svg";
-        this.#mainImage.src = leadImageUrl;
 
+        const content = data?.content;
+        const heading = data?.title;
+        const leadImageUrl = data?.lead_image_url || "/images/not_available.svg";
+
+        if (heading) this.#mainHeading.innerText = heading;
+        this.#mainImage.src = leadImageUrl;
         this.#toggleLoading(false);
         this.#content.innerHTML = content;
     }
 
     #showErrorContent () {
-        console.log("errror");
         const paragraph = document.querySelector("p");
         paragraph.innerText = "Sorry, the article could not be freed from clutter.";
         this.#content.appendChild(paragraph);
@@ -40,8 +44,8 @@ export default class PopupModal {
         this.#toggleVisibility(false);
         this.#resetModuleToEmpty();
         this.#mainImage.src = "";
+        this.#mainHeading.innerText = "";
         document.querySelector("html").style.overflowY = "visible";
-
     }
 
     #resetModuleToEmpty () {
