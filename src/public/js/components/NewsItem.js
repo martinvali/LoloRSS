@@ -1,11 +1,13 @@
 export default class NewsItem {
     categories;
+    #hiddenCategories;
     #HTMLElement;
     
     constructor (data) {
         this.#HTMLElement =  this.#generateNewsItemHTML(data);
         this.categories = this.#getNewsItemCategories(data);
         this.setVisibilityTo(true);
+        this.#hiddenCategories = new Set();
     }
 
     getHTMLElement () {

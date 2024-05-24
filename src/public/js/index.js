@@ -3,6 +3,7 @@ import NewsItem from "./components/NewsItem.js";
 
 const modalContainer = document.querySelector(".module-container");
 const modal = new PopupModal(modalContainer);
+const allFilters = {};
 const allNewsItems = [];
 
 function initializeWebsite() {
@@ -29,10 +30,11 @@ function filterCategoriesClicked (e) {
     const category = target?.value;
     const isChecked = target?.checked;
     
+    allFilters[category] = isChecked;
+
     for (const newsItem of allNewsItems) {
-        console.log(newsItem);
-        if(!newsItem?.categories?.includes(category)) continue;
-        newsItem.setVisibilityTo(isChecked);
+        if(newsItem?.categories?.every((category) => allFilters[category] === false)) newsItem.setVisibilityTo(false);
+        else newsItem.setVisibilityTo(true);
     }
 }
 
@@ -105,6 +107,8 @@ function generateCategoriesFilters () {
         containerElement.appendChild(labelElement);
         
         categoriesContainer.appendChild(containerElement);
+
+        allFilters[category] = true;
     }
 }
 
