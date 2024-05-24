@@ -7,7 +7,8 @@ export default class PopupModal {
         this.#container = container;
         this.#mainImage = container.querySelector(".news-item-module-image");
         this.#content = container.querySelector(".news-item-module-content");
-        container.querySelector(".news-item-module-close-button")?.addEventListener("click", this.#closeButtonClicked.bind(this));
+        container.querySelector(".news-item-module-close-button")?.addEventListener("click", this.#hideModule.bind(this));
+        this.#container.addEventListener("click", this.#containerClicked.bind(this));
     }
 
     showLoading () {
@@ -34,7 +35,7 @@ export default class PopupModal {
         this.#toggleLoading(false);
     }
 
-    #closeButtonClicked () {
+    #hideModule () {
         this.#toggleVisibility(false);
         this.#resetModuleToEmpty();
     }
@@ -45,6 +46,11 @@ export default class PopupModal {
 
     #toggleLoading (isLoading) {
         this.#container.classList.toggle("loading", isLoading);
+    }
+
+    #containerClicked (e) {
+        if(e?.target !== this.#container) return;
+        this.#hideModule();
     }
 
     #toggleVisibility (isVisible) {
