@@ -11,6 +11,25 @@ html {
     --news-item-text-padding: 1.5rem;
 }
 
+
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: #a7a7a7;
+}
+
+
 .max-width-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -25,6 +44,7 @@ html {
     grid-template-columns: 1fr;
     row-gap: 2rem;
 }
+
 
 .skeleton {
     display: none;
@@ -53,3 +73,4 @@ html {
       background-position: 100% 0;
     }
   }
+
