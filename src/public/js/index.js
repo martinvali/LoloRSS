@@ -3,6 +3,7 @@ import NewsItem from "./components/NewsItem.js";
 
 const modalContainer = document.querySelector(".module-container");
 const modal = new PopupModal(modalContainer);
+const allNewsItems = [];
 
 function initializeWebsite() {
     fetchInitialContent();
@@ -58,12 +59,37 @@ function generateNewsArticles (xmlDocument) {
         const newsItemData = newsItems[i];
         const newsItem = new NewsItem(newsItemData);
         const newsItemHTML = newsItem.getHTMLElement();
-        const newsItemCategories = newsItem.categories;
         newsItemsContainer.appendChild(newsItemHTML);
+        allNewsItems.push(newsItem);
     }
     document.body.classList.remove("loading");
+    generateCategoriesFilters();
 }
 
+function generateCategoriesFilters () {
+    const categories = new Set(allNewsItems.flatMap((newsItem) => newsItem.categories));
+    const categoriesContainer = document.querySelector(".filter-categories-container");
 
+    for (const category of categories) {
+        const containerElement = document.createElement("div");
+        containerElement.classList.add("filter-category-container");
+        
+        const labelElement = document.createElement("label");
+        labelElement.classList.add("filter-category-label");
+        labelElement.textContent = category;
+        labelElement.setAttribute("for", category);
+
+        const inputElement = document.createElement("input");
+        inputElement.classList.add("filter-category-input");
+        inputElement.id = category;
+        inputElement.value = category;
+        inputElement.type = "checkbox";
+
+        containerElement.appendChild(inputElement);
+        containerElement.appendChild(labelElement);
+        
+        categoriesContainer.appendChild(containerElement);
+    }
+}
 
 initializeWebsite();

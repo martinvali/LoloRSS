@@ -32,6 +32,7 @@ html {
 
 .header {
     padding: 0 1.6rem;
+    margin-bottom: 1.5rem;
 }
 
 .heading {
@@ -39,10 +40,30 @@ html {
     text-align: center;
 }
 
-.filter-categories-text {
-    font-size: 1.6rem;
+.filter-categories-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
 }
 
+.filter-categories-text {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.filter-category-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.filter-category-label {
+    font-size: 1.2rem;
+}
+
+.filter-category-input {
+    margin-right: 0.8rem;
+}
 
 .max-width-container {
     max-width: 1200px;

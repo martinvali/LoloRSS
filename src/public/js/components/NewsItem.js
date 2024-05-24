@@ -5,10 +5,15 @@ export default class NewsItem {
     constructor (data) {
         this.#HTMLElement =  this.#generateNewsItemHTML(data);
         this.categories = this.#getNewsItemCategories(data);
+        this.setVisibilityTo(true);
     }
 
     getHTMLElement () {
         return this.#HTMLElement;
+    }
+
+    setVisibilityTo (isVisible) {
+        this.#HTMLElement.classList.toggle("visible", isVisible);
     }
 
     #generateNewsItemHTML (data) {
@@ -55,6 +60,7 @@ export default class NewsItem {
         newsItemContainer.appendChild(newsItemDescription);
         return newsItemContainer;
     }
+
 
     #getNewsItemCategories (data) {
         return Array.from(data.getElementsByTagName("category")).map((category) => category.textContent).filter((category) => category !== "");
