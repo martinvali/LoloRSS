@@ -1,4 +1,5 @@
 import PopupModal from "./components/popupModal.js";
+import NewsItem from "./components/NewsItem.js";
 
 const modalContainer = document.querySelector(".module-container");
 const modal = new PopupModal(modalContainer);
@@ -55,56 +56,14 @@ function generateNewsArticles (xmlDocument) {
     const newsItemsContainer = document.querySelector(".news-items");
     for (let i = 0; i < newsItems?.length; i++) {
         const newsItemData = newsItems[i];
-        const newsItemElement = generateNewsItemElement(newsItemData);
-        newsItemsContainer.appendChild(newsItemElement);
+        const newsItem = new NewsItem(newsItemData);
+        const newsItemHTML = newsItem.getHTMLElement();
+        const newsItemCategories = newsItem.categories;
+        newsItemsContainer.appendChild(newsItemHTML);
     }
     document.body.classList.remove("loading");
 }
 
 
-function generateNewsItemElement (newsItemData) {
-    const DATE_START_INDEX = 5;
-    const DATE_END_INDEX = 16;
-    const date = newsItemData.getElementsByTagName("pubDate")?.[0];
-    const dateText = (date.textContent || date.innerText).slice(DATE_START_INDEX, DATE_END_INDEX);
-
-    const link = newsItemData.getElementsByTagName("link")?.[0];
-    const linkUrl = link.textContent || link.innerText || "";
-
-    const image = newsItemData.getElementsByTagName("media:content")?.[0];
-    const imageSrc = image?.getAttribute("url") || "/images/not_available.svg";
-
-    const title = newsItemData.getElementsByTagName("title")?.[0];
-    const titleText = title.textContent || title.innerText || "No Title";
-
-    const description = newsItemData.getElementsByTagName("description")?.[0];
-    const descriptionText = description.textContent || description.innerText || "No Description";
-
-    const newsItemContainer = document.createElement("li");
-    newsItemContainer.classList.add("news-item");
-    newsItemContainer.dataset.url = linkUrl;
-
-    const newsItemDate = document.createElement("p");
-    newsItemDate.classList.add("news-item-date");
-    newsItemDate.innerText = dateText;
-
-    const newsItemTitle = document.createElement("h2");
-    newsItemTitle.classList.add("news-item-title");
-    newsItemTitle.innerText = titleText;
-
-    const newsItemDescription = document.createElement("p");
-    newsItemDescription.classList.add("news-item-description");
-    newsItemDescription.innerText = descriptionText;
-
-    const newsItemImage = document.createElement("img");
-    newsItemImage.setAttribute("src", imageSrc);
-    newsItemImage.classList.add("news-item-image");
-
-    newsItemContainer.appendChild(newsItemImage);
-    newsItemContainer.appendChild(newsItemDate);
-    newsItemContainer.appendChild(newsItemTitle);
-    newsItemContainer.appendChild(newsItemDescription);
-    return newsItemContainer;
-}
 
 initializeWebsite();
