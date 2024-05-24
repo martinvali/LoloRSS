@@ -81,6 +81,7 @@ function generateCategoriesFilters () {
 
         const inputElement = document.createElement("input");
         inputElement.classList.add("filter-category-input");
+        inputElement.checked = true;
         inputElement.id = category;
         inputElement.value = category;
         inputElement.type = "checkbox";
