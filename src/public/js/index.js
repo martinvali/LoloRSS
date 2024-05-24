@@ -21,7 +21,6 @@ async function newsItemsClicked (e) {
     modal.showLoading(url);
     const data = await freeNewsItemFromClutter(url);
 
-    console.log(data);
     modal.showContent(data);
 }
 
@@ -83,7 +82,7 @@ function generateNewsArticles (xmlDocument) {
     allNewsItems.sort((a, b) => b.date - a.date);
 
     for (const newsItem of allNewsItems) {
-        document.body.appendChild(newsItem.getHTMLElement());
+        newsItemsContainer.appendChild(newsItem.getHTMLElement());
     }
     document.body.classList.remove("loading");
     generateCategoriesFilters();
