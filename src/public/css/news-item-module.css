@@ -34,6 +34,15 @@
     font-size: 1.2rem;
 }
 
+.news-item-module h3,
+.news-item-module h4,
+.news-item-module h5,
+.news-item-module h6 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
 .news-item-module .news-item-module-close-button {
     width: 1.8rem;
     height: 1.8rem;
