@@ -12,6 +12,7 @@ export default class PopupModal {
     }
 
     showLoading () {
+        document.querySelector("html").style.overflowY = "hidden";
         this.#toggleVisibility(true);
     }
 
@@ -38,6 +39,9 @@ export default class PopupModal {
     #hideModule () {
         this.#toggleVisibility(false);
         this.#resetModuleToEmpty();
+        this.#mainImage.src = "";
+        document.querySelector("html").style.overflowY = "visible";
+
     }
 
     #resetModuleToEmpty () {
