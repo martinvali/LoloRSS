@@ -2,5 +2,15 @@
   "dependencies": {
     "express": "^4.19.2",
     "node-fetch": "^2.7.0"
-  }
+  },
+  "name": "uptime",
+  "description": "Hosted at:",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC"
 }
