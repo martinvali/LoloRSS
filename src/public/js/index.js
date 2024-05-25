@@ -13,12 +13,24 @@ const allNewsItems = [];
 async function initializeWebsite() {
 
     const rssFeeds = localStorage.getItem("feeds") || [DEFAULT_RSS_FEED];
+    displayCurrentRSSFeedsLinks(rssFeeds);
 
     const xmlArticles = await getFeedsArticles(rssFeeds);
     generateNewsArticles(xmlArticles);
 
     document.querySelector(".news-items")?.addEventListener("click", newsItemsClicked);
     document.querySelector(".filter-categories-container").addEventListener("change", filterCategoriesClicked);
+}
+
+function displayCurrentRSSFeedsLinks (rssFeeds) {
+    const container = document.querySelector(".rss-feeds");
+    for (const url of rssFeeds) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = url;
+        input.classList.add("rss-feed-input");
+        container.appendChild(input);
+    }
 }
 
 async function newsItemsClicked (e) {
