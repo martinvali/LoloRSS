@@ -2,13 +2,15 @@ export default class RSSFeedsEditor {
     #urls;
     #container;
     #addNewFeedInput;
+    #feedsManager;
 
-    constructor (urls, container) {
+    constructor (urls, container, feedsManager) {
         this.#urls = urls;
         this.#container = container;
         this.#addNewFeedInput = container.querySelector(".add-new-rss-feed-input");
         container.querySelector(".add-new-rss-feed-button").addEventListener("click", this.#addNewFeed.bind(this));
         this.#generateInputsForAllUrls();
+        this.#feedsManager = feedsManager;
     }
 
     #generateInputsForAllUrls () {
@@ -27,7 +29,10 @@ export default class RSSFeedsEditor {
 
     #addNewFeed () {
         const url = this.#addNewFeedInput?.value;
+        if(!url) return;
+        this.#addNewFeedInput.value = "";
         this.#urls.push(url);
         this.#displayNewFeed(url);
+        this.#feedsManager.addFeeds([url]);
     }
 }
