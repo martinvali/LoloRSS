@@ -6,7 +6,7 @@ export default class RSSFeedsManager {
     #newsItemsContainer;
     #skeletonLoadersContainer;
     #categoriesManager;
-    allNewsItems = [];
+    allNewsItems = {};
 
     constructor (categoriesManager) {
         this.#categoriesManager = categoriesManager;
@@ -20,7 +20,7 @@ export default class RSSFeedsManager {
         
         const xmlArticles = await getFeedsArticles(rssFeeds);
         this.#generateNewsArticles(xmlArticles, id);
-        this.#categoriesManager.updateCategories(this.allNewsItems);
+        this.#categoriesManager.updateCategories(Object.values(this.allNewsItems).flat(1));
 
         localStorage.setItem("feeds", JSON.stringify(this.#feedurls));
         this.#updateLocalStorage();
@@ -30,7 +30,8 @@ export default class RSSFeedsManager {
         this.#newsItemsContainer.querySelector(`.news-feed-container[data-id="${id}"]`)?.remove();
         this.#feedurls = this.#feedurls.splice(id, 1);
         this.#updateLocalStorage();
-        this.#categoriesManager.updateCategories(this.allNewsItems);
+        delete this.allNewsItems[id];
+        this.#categoriesManager.updateCategories(Object.values(this.allNewsItems).flat(1));
     }
 
     #updateLocalStorage () {
@@ -55,7 +56,6 @@ export default class RSSFeedsManager {
                 const newsItemData = newsItems[i];
                 const newsItem = new NewsItem(newsItemData, id);
                 newsFeedItems.push(newsItem);
-                this.allNewsItems.push(newsItem);
             }
     
             newsFeedItems.sort((a, b) => b.date - a.date);
@@ -64,6 +64,7 @@ export default class RSSFeedsManager {
                 newsFeedContainer.appendChild(newsItem.getHTMLElement());
             }
 
+            this.allNewsItems[id] = newsFeedItems;
             newsItemsContainer.insertBefore(newsFeedContainer, this.#skeletonLoadersContainer.nextSibling);
             id++;
         }

@@ -49,7 +49,7 @@ function filterCategoriesClicked (e) {
     allFilters[category] = isChecked;
 
 
-    for (const newsItem of feedsManager.allNewsItems) {
+    for (const newsItem of Object.values(feedsManager.allNewsItems).flat(1)) {
         if(newsItem?.categories?.every((category) => allFilters[category] === false)) newsItem.setVisibilityTo(false);
         else newsItem.setVisibilityTo(true);
     }
