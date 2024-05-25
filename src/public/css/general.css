@@ -186,6 +186,11 @@ body {
     row-gap: 2rem;
 }
 
+.news-feed-container.news-items:not(:last-of-type) {
+    margin-bottom: 10rem;
+}
+
+
 
 .skeleton {
     display: none;

@@ -9,7 +9,7 @@ export default class RSSFeedsManager {
 
     constructor (categoriesManager) {
         this.#categoriesManager = categoriesManager;
-        this.#newsItemsContainer = document.querySelector(".news-items");
+        this.#newsItemsContainer = document.querySelector(".news-items-container");
     }
 
     async addFeeds (rssFeeds, id = 0) {
@@ -41,9 +41,9 @@ export default class RSSFeedsManager {
 
 
         for (const xmlDocument of xmlDocuments) {
-            const newsFeedContainer = document.createElement("li");
+            const newsFeedContainer = document.createElement("ul");
             newsFeedContainer.dataset.id = id;
-            newsFeedContainer.classList.add("news-feed-container");
+            newsFeedContainer.classList.add("news-feed-container", "news-items");
 
             const newsFeedItems = [];
             const newsItems = xmlDocument.getElementsByTagName("item");
