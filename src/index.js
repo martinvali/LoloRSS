@@ -1,9 +1,10 @@
 const app = require("./configs/server");
 const fetch = require("node-fetch");
 const isValidUrl = require("./helpers/isValidUrl");
+const path = require("path");
 
 app.get("/", (req, res) => {
-    res.sendFile("index.html");
+    res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 app.get("/test", (req,res) => console.log(req));
