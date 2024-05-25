@@ -36,7 +36,7 @@ export default class RSSFeedsEditor {
         const container = document.createElement("div");
         container.classList.add("rss-feed-input-container");
         container.dataset.id = id;
-        
+
         const deleteButton = document.createElement("button");
         deleteButton.classList.add("rss-feed-input-delete-button", "rss-feed-button");
 
@@ -54,15 +54,14 @@ export default class RSSFeedsEditor {
     #addNewFeed () {
         const url = this.#addNewFeedInput?.value;
         if(!url) return;
-
+    
         this.#addNewFeedInput.value = "";
         this.#urls.push(url);
         this.#displayNewFeed(url, this.#urls.length - 1);
-        this.#feedsManager.addFeeds([url]);
+        this.#feedsManager.addFeeds([url], this.#urls.length - 1);
     }
 
     #removeFeed (id) {
         this.#feedsManager.removeFeed(id);
-
     }
 }

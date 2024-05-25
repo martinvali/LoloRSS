@@ -17,7 +17,7 @@ const allFilters = {};
 async function initializeWebsite() {
 
     const rssFeeds = JSON.parse(localStorage.getItem("feeds")) || [DEFAULT_RSS_FEED];
-
+    
     const rssFeedsContainer = document.querySelector(".rss-feeds-inputs-container");
     new RSSFeedsEditor(rssFeeds, rssFeedsContainer, feedsManager);
 

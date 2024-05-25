@@ -12,24 +12,30 @@ export default class RSSFeedsManager {
         this.#newsItemsContainer = document.querySelector(".news-items");
     }
 
-    async addFeeds (rssFeeds) {
+    async addFeeds (rssFeeds, id = 0) {
         if(Array.isArray(rssFeeds)) this.#feedurls = [...this.#feedurls, ...rssFeeds];
         else this.#feedurls.push(rssFeeds);
         const xmlArticles = await getFeedsArticles(rssFeeds);
-        this.#generateNewsArticles(xmlArticles);
+        this.#generateNewsArticles(xmlArticles, id);
         this.#categoriesManager.updateCategories(this.allNewsItems);
 
-        console.log(this.#feedurls, "SET");
         localStorage.setItem("feeds", JSON.stringify(this.#feedurls));
+        this.#updateLocalStorage();
     }
 
     removeFeed (id) {
         this.#newsItemsContainer.querySelector(`.news-feed-container[data-id="${id}"]`)?.remove();
+        this.#feedurls = this.#feedurls.splice(id, 1);
+        this.#updateLocalStorage();
+        this.#categoriesManager.updateCategories(this.allNewsItems);
     }
 
-    #generateNewsArticles (xmlDocuments) {
+    #updateLocalStorage () {
+        localStorage.setItem("feeds", JSON.stringify(this.#feedurls));
+    }
+
+    #generateNewsArticles (xmlDocuments, id = 0) {
         const newsItemsContainer = this.#newsItemsContainer;
-        let id = 0;
 
         document.body.classList.add("loading");
 
