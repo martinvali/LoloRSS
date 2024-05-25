@@ -57,6 +57,40 @@ html {
 .rss-feeds-container {
     margin-bottom: 2rem;
 }
+
+.add-rss-feed-input-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+.rss-feed-input.add-new-rss-feed-input {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.add-new-rss-feed-button {
+    border: 1px solid #EFF5FF;
+    border-left: none;
+    cursor: pointer;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #62C1BB;
+    background-color: rgba(98, 193, 187, 0.1);
+    font-size: 1.2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.rss-feeds-inputs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .rss-feed-input {
     width: 100%;
     border: 1px solid #EFF5FF;
