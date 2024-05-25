@@ -1,13 +1,21 @@
 import PopupModal from "./components/popupModal.js";
 import NewsItem from "./components/NewsItem.js";
 
+import getFeedsArticles from "./helpers/getFeedsArticles.js";
+
+const DEFAULT_RSS_FEED = "https://flipboard.com/@raimoseero/feed-nii8kd0sz.rss";
+
 const modalContainer = document.querySelector(".module-container");
 const modal = new PopupModal(modalContainer);
 const allFilters = {};
 const allNewsItems = [];
 
-function initializeWebsite() {
-    fetchInitialContent();
+async function initializeWebsite() {
+
+    //const rssFeeds = localStorage.get("feeds") || [DEFAULT_RSS_FEED];
+    const xmlArticles = await getFeedsArticles([DEFAULT_RSS_FEED, DEFAULT_RSS_FEED]);
+    generateNewsArticles(xmlArticles);
+
     document.querySelector(".news-items")?.addEventListener("click", newsItemsClicked);
     document.querySelector(".filter-categories-container").addEventListener("change", filterCategoriesClicked);
 }
@@ -40,21 +48,6 @@ function filterCategoriesClicked (e) {
     }
 }
 
-async function fetchInitialContent () {
-    const INITIAL_CONTENT_URL = "https://flipboard.com/@raimoseero/feed-nii8kd0sz.rss";
-    const response = await getUrlContent(INITIAL_CONTENT_URL);
-    const data = await response.text();
-    const xmlDocument = parseXml(data);
-    generateNewsArticles(xmlDocument);
-}
-
-async function getUrlContent (url) {
-    const queryStringParameters = new URLSearchParams();
-    queryStringParameters.append("url", url);
-    const response = await fetch("/content?" + queryStringParameters);
-    return response;
-}
-
 async function freeNewsItemFromClutter (url) {
     const queryStringParameters = new URLSearchParams();
     queryStringParameters.append("url", url);
@@ -64,25 +57,26 @@ async function freeNewsItemFromClutter (url) {
     return data;
 }
 
-function parseXml (xmlString) {
-    const parser = new DOMParser();
-    const document = parser.parseFromString(xmlString, "application/xml");
-    return document;
-}
-
-function generateNewsArticles (xmlDocument) {
-    const newsItems = xmlDocument.getElementsByTagName("item");
+function generateNewsArticles (xmlDocuments) {
     const newsItemsContainer = document.querySelector(".news-items");
-    for (let i = 0; i < newsItems?.length; i++) {
-        const newsItemData = newsItems[i];
-        const newsItem = new NewsItem(newsItemData);
-        allNewsItems.push(newsItem);
-    }
 
-    allNewsItems.sort((a, b) => b.date - a.date);
+    for (const xmlDocument of xmlDocuments) {
+        const feedNewsItems = [];
+        const newsItems = xmlDocument.getElementsByTagName("item");
 
-    for (const newsItem of allNewsItems) {
-        newsItemsContainer.appendChild(newsItem.getHTMLElement());
+        for (let i = 0; i < newsItems?.length; i++) {
+            const newsItemData = newsItems[i];
+            const newsItem = new NewsItem(newsItemData);
+            allNewsItems.push(newsItem);
+            feedNewsItems.push(newsItem);
+        }
+
+        feedNewsItems.sort((a, b) => b.date - a.date);
+
+        for (const newsItem of feedNewsItems) {
+            newsItemsContainer.appendChild(newsItem.getHTMLElement());
+        }
+        
     }
     document.body.classList.remove("loading");
     generateCategoriesFilters();

@@ -8,13 +8,18 @@ app.get("/", (req, res) => {
 app.get("/test", (req,res) => console.log(req));
 
 app.get("/content", async (req, res) => {
-    const url = req?.query?.url;
-    if(!url) return res.status(400).json("");
+    const urls = req?.query?.url;
 
-    const response = await fetch(url);
-    const data = await response.text();
-    res.set('Content-Type', 'application/xml');
-    return res.send(data);
+    if(!urls) return res.status(400).json("");
+
+    const dataArray = [];
+    for (const url of urls) {
+        const response = await fetch(url);
+        const data = await response.text();
+        dataArray.push(data);
+    }
+    res.set('Content-Type', 'application/json');
+    return res.json(dataArray);
 });
 
 app.get("/webparser", async (req,res) => {
