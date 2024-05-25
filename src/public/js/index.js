@@ -1,5 +1,5 @@
 import CategoriesManager from "./components/CategoriesManager.js";
-import PopupModal from "./components/popupModal.js";
+import PopupModal from "./components/PopupModal.js";
 import RSSFeedsEditor from "./components/RSSFeedsEditor.js";
 import RSSFeedsManager from "./components/RSSFeedsManager.js";
 
@@ -12,7 +12,7 @@ const categoriesManager = new CategoriesManager(document.querySelector(".filter-
 
 const feedsManager = new RSSFeedsManager(categoriesManager);
 
-const allFilters = {};
+categoriesManager.feedsManager = feedsManager;
 
 async function initializeWebsite() {
 
@@ -24,7 +24,6 @@ async function initializeWebsite() {
     feedsManager.addFeeds(rssFeeds);
 
     document.querySelector(".news-items-container")?.addEventListener("click", newsItemsClicked);
-    document.querySelector(".filter-categories-container").addEventListener("change", filterCategoriesClicked);
 }
 
 async function newsItemsClicked (e) {
@@ -38,22 +37,6 @@ async function newsItemsClicked (e) {
     const data = await freeNewsItemFromClutter(url);
 
     modal.showContent(data);
-}
-
-function filterCategoriesClicked (e) {
-    if(!e.target.type === "checkbox") return;
-    
-    const target = e?.target;
-    const category = target?.value;
-    const isChecked = target?.checked;
-    
-    allFilters[category] = isChecked;
-
-
-    for (const newsItem of Object.values(feedsManager.allNewsItems).flat(1)) {
-        if(newsItem?.categories?.every((category) => allFilters[category] === false)) newsItem.setVisibilityTo(false);
-        else newsItem.setVisibilityTo(true);
-    }
 }
 
 async function freeNewsItemFromClutter (url) {

@@ -1,11 +1,16 @@
 export default class CategoriesManager {
     #container;
     #categories = new Set(["Other"]);
-
+    #feedsManager;
     #allFilters = {};
 
     constructor (container) {
         this.#container = container;
+        this.#container.addEventListener("change", this.#filterCategoriesClicked.bind(this));
+    }
+
+    set feedsManager (feedsManager) {
+        this.#feedsManager = feedsManager;
     }
 
     updateCategories (allNewsItems) {
@@ -41,6 +46,22 @@ export default class CategoriesManager {
             categoriesContainer.appendChild(containerElement);
     
             this.#allFilters[category] = true;
+        }
+    }
+
+    #filterCategoriesClicked (e) {
+        if(!e.target.type === "checkbox") return;
+        
+        const target = e?.target;
+        const category = target?.value;
+        const isChecked = target?.checked;
+        
+        this.#allFilters[category] = isChecked;
+    
+    
+        for (const newsItem of Object.values(this.#feedsManager?.allNewsItems).flat(1)) {
+            if(newsItem?.categories?.every((category) => this.#allFilters[category] === false)) newsItem.setVisibilityTo(false);
+            else newsItem.setVisibilityTo(true);
         }
     }
 }
