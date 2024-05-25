@@ -1,6 +1,7 @@
 export default class CategoriesManager {
     #container;
     #categories = new Set(["Other"]);
+
     #allFilters = {};
 
     constructor (container) {
@@ -15,8 +16,10 @@ export default class CategoriesManager {
         this.#categories = new Set([...this.#categories, ...(allNewsItems.flatMap((newsItem) => newsItem.categories))]);
 
         const categoriesContainer = this.#container;
-    
+        
         for (const category of this.#categories) {
+            if(category in this.#allFilters) return;
+            
             const containerElement = document.createElement("div");
             containerElement.classList.add("filter-category-container");
             
