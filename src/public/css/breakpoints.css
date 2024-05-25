@@ -3,6 +3,10 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
     }
+
+    .news-item-module .skeleton {
+        height: 300px;
+    }
 }
 
 @media only screen and (min-width: 1000px) {

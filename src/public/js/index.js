@@ -23,12 +23,13 @@ async function initializeWebsite() {
 
     feedsManager.addFeeds(rssFeeds);
 
-    document.querySelector(".news-items")?.addEventListener("click", newsItemsClicked);
+    document.querySelector(".news-items-container")?.addEventListener("click", newsItemsClicked);
     document.querySelector(".filter-categories-container").addEventListener("change", filterCategoriesClicked);
 }
 
 async function newsItemsClicked (e) {
     const target = e?.target;
+    console.log(target);
     const newsItem = target?.closest(".news-item");
     if(!newsItem) return;
 
