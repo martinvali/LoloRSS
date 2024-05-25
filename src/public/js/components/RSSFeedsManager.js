@@ -23,31 +23,40 @@ export default class RSSFeedsManager {
         localStorage.setItem("feeds", JSON.stringify(this.#feedurls));
     }
 
-    removeFeed () {
-
+    removeFeed (id) {
+        this.#newsItemsContainer.querySelector(`.news-feed-container[data-id="${id}"]`)?.remove();
     }
 
     #generateNewsArticles (xmlDocuments) {
         const newsItemsContainer = this.#newsItemsContainer;
-        
+        let id = 0;
+
         document.body.classList.add("loading");
+
+
         for (const xmlDocument of xmlDocuments) {
-            const feedNewsItems = [];
+            const newsFeedContainer = document.createElement("li");
+            newsFeedContainer.dataset.id = id;
+            newsFeedContainer.classList.add("news-feed-container");
+
+            const newsFeedItems = [];
             const newsItems = xmlDocument.getElementsByTagName("item");
     
             for (let i = 0; i < newsItems?.length; i++) {
                 const newsItemData = newsItems[i];
-                const newsItem = new NewsItem(newsItemData);
+                const newsItem = new NewsItem(newsItemData, id);
+                newsFeedItems.push(newsItem);
                 this.allNewsItems.push(newsItem);
-                feedNewsItems.push(newsItem);
             }
     
-            feedNewsItems.sort((a, b) => b.date - a.date);
-    
-            for (const newsItem of feedNewsItems) {
-                newsItemsContainer.appendChild(newsItem.getHTMLElement());
-            }
+            newsFeedItems.sort((a, b) => b.date - a.date);
             
+            for (const newsItem of newsFeedItems) {
+                newsFeedContainer.appendChild(newsItem.getHTMLElement());
+            }
+
+            newsItemsContainer.appendChild(newsFeedContainer);
+            id++;
         }
         document.body.classList.remove("loading");
     }
