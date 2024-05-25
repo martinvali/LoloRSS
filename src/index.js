@@ -1,5 +1,6 @@
 const app = require("./configs/server");
 const fetch = require("node-fetch");
+const isValidUrl = require("./helpers/isValidUrl");
 
 app.get("/", (req, res) => {
     res.sendFile("index.html");
@@ -17,6 +18,7 @@ app.get("/content", async (req, res) => {
         if(!urls) return res.status(400).json("");
         
         for (const url of urls) {
+            if(!isValidUrl(url)) continue;
             const response = await fetch(url);
             const data = await response.text();
             dataArray.push(data);
