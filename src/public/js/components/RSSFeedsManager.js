@@ -13,10 +13,14 @@ export default class RSSFeedsManager {
     }
 
     async addFeeds (rssFeeds) {
-        this.#feedurls = [...this.#feedurls, ...rssFeeds];
+        if(Array.isArray(rssFeeds)) this.#feedurls = [...this.#feedurls, ...rssFeeds];
+        else this.#feedurls.push(rssFeeds);
         const xmlArticles = await getFeedsArticles(rssFeeds);
         this.#generateNewsArticles(xmlArticles);
         this.#categoriesManager.updateCategories(this.allNewsItems);
+
+        console.log(this.#feedurls, "SET");
+        localStorage.setItem("feeds", JSON.stringify(this.#feedurls));
     }
 
     removeFeed () {
