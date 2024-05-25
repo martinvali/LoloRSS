@@ -26,9 +26,9 @@ export default class RSSFeedsManager {
         this.#updateLocalStorage();
     }
 
-    removeFeed (id) {
+    removeFeed (id, newUrls) {
         this.#newsItemsContainer.querySelector(`.news-feed-container[data-id="${id}"]`)?.remove();
-        this.#feedurls = this.#feedurls.splice(id, 1);
+        this.#feedurls = newUrls;
         this.#updateLocalStorage();
         delete this.allNewsItems[id];
         this.#categoriesManager.updateCategories(Object.values(this.allNewsItems).flat(1));

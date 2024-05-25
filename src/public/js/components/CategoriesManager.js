@@ -15,12 +15,10 @@ export default class CategoriesManager {
     #generateCategoriesFilters (allNewsItems) {
         this.#categories = new Set([...Object.values(allNewsItems.flatMap((newsItem) => newsItem.categories))]);
 
-
         this.#container.innerHTML = "";
         const categoriesContainer = this.#container;
 
         for (const category of this.#categories) {
-            if(category in this.#allFilters) return;
             
             const containerElement = document.createElement("div");
             containerElement.classList.add("filter-category-container");

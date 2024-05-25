@@ -1,11 +1,11 @@
 export default class RSSFeedsEditor {
-    #urls;
+    #urls =  {}
     #container;
     #addNewFeedInput;
     #feedsManager;
 
     constructor (urls, container, feedsManager) {
-        this.#urls = urls;
+        urls.forEach((url, index) => this.#urls[index] = url);
         this.#container = container;
         this.#addNewFeedInput = container.querySelector(".add-new-rss-feed-input");
         container.querySelector(".rss-feed-button.add-new-rss-feed-button").addEventListener("click", this.#addNewFeed.bind(this));
@@ -26,8 +26,9 @@ export default class RSSFeedsEditor {
 
     #generateInputsForAllUrls () {
         let id = 0;
-        for (const url of this.#urls) {
+        for (const url of Object.values(this.#urls)) {
             this.#displayNewFeed(url, id);
+            this.#urls[id] = url;
             id++;
         }
     }
@@ -48,7 +49,6 @@ export default class RSSFeedsEditor {
         container.appendChild(input);
         container.appendChild(deleteButton);
         this.#container.appendChild(container);
-
     }
 
     async #addNewFeed () {
@@ -56,7 +56,7 @@ export default class RSSFeedsEditor {
         if(!url) return;
     
         this.#addNewFeedInput.value = "";
-        this.#urls.push(url);
+        this.#urls[this.#urls.length - 1] = url;
         this.#displayNewFeed(url, this.#urls.length - 1);
 
         document.body.classList.add("loading");
@@ -65,6 +65,7 @@ export default class RSSFeedsEditor {
     }
 
     #removeFeed (id) {
-        this.#feedsManager.removeFeed(id);
+        delete this.#urls[id];
+        this.#feedsManager.removeFeed(id, Object.values(this.#urls));
     }
 }
