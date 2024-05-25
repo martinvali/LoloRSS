@@ -51,14 +51,17 @@ export default class RSSFeedsEditor {
 
     }
 
-    #addNewFeed () {
+    async #addNewFeed () {
         const url = this.#addNewFeedInput?.value;
         if(!url) return;
     
         this.#addNewFeedInput.value = "";
         this.#urls.push(url);
         this.#displayNewFeed(url, this.#urls.length - 1);
-        this.#feedsManager.addFeeds([url], this.#urls.length - 1);
+
+        document.body.classList.add("loading");
+        await this.#feedsManager.addFeeds([url], this.#urls.length - 1);
+        document.body.classList.remove("loading");
     }
 
     #removeFeed (id) {
