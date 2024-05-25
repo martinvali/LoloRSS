@@ -3,6 +3,7 @@ export default class RSSFeedsEditor {
     #container;
     #addNewFeedInput;
     #feedsManager;
+    #highestId;
 
     constructor (urls, container, feedsManager) {
         urls.forEach((url, index) => this.#urls[index] = url);
@@ -12,6 +13,14 @@ export default class RSSFeedsEditor {
         this.#generateInputsForAllUrls();
         this.#feedsManager = feedsManager;
         this.#container.addEventListener("click", this.#containerClicked.bind(this));
+        this.#highestId = Object.keys(this.#urls).length - 1;
+    }
+
+    get #nextId () {
+        console.log("doing");
+        const currentHighestId = this.#highestId;
+        this.#highestId += 1;
+        return currentHighestId;
     }
 
     #containerClicked (e) {
@@ -56,11 +65,14 @@ export default class RSSFeedsEditor {
         if(!url) return;
     
         this.#addNewFeedInput.value = "";
-        this.#urls[this.#urls.length - 1] = url;
-        this.#displayNewFeed(url, this.#urls.length - 1);
 
+        const id = this.#nextId;
+        this.#urls[id] = url;
+
+        console.log(this.#urls);
+        this.#displayNewFeed(url, id);
         document.body.classList.add("loading");
-        await this.#feedsManager.addFeeds([url], this.#urls.length - 1);
+        await this.#feedsManager.addFeeds([url], id);
         document.body.classList.remove("loading");
     }
 
