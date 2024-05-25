@@ -12,8 +12,9 @@ const allNewsItems = [];
 
 async function initializeWebsite() {
 
-    //const rssFeeds = localStorage.get("feeds") || [DEFAULT_RSS_FEED];
-    const xmlArticles = await getFeedsArticles([DEFAULT_RSS_FEED, DEFAULT_RSS_FEED]);
+    const rssFeeds = localStorage.getItem("feeds") || [DEFAULT_RSS_FEED];
+
+    const xmlArticles = await getFeedsArticles(rssFeeds);
     generateNewsArticles(xmlArticles);
 
     document.querySelector(".news-items")?.addEventListener("click", newsItemsClicked);

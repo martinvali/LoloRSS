@@ -8,10 +8,12 @@ app.get("/", (req, res) => {
 app.get("/test", (req,res) => console.log(req));
 
 app.get("/content", async (req, res) => {
-    const urls = req?.query?.url;
+    let urls = req?.query?.url;
+
+    if(!Array.isArray(urls)) urls = [urls];
 
     if(!urls) return res.status(400).json("");
-
+    
     const dataArray = [];
     for (const url of urls) {
         const response = await fetch(url);
