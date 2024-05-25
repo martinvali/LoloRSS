@@ -46,7 +46,8 @@ html {
     gap: 1.2rem;
 }
 
-.filter-categories-text {
+.subheading {
+    font-weight: 500;
     font-size: 1.6rem;
     margin-bottom: 1rem;
 }
