@@ -17,10 +17,9 @@ export default class RSSFeedsEditor {
     }
 
     get #nextId () {
-        console.log("doing");
-        const currentHighestId = this.#highestId;
+        const nextHighestId = this.#highestId + 1
         this.#highestId += 1;
-        return currentHighestId;
+        return nextHighestId;
     }
 
     #containerClicked (e) {

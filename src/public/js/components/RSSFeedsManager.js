@@ -32,6 +32,7 @@ export default class RSSFeedsManager {
         this.#updateLocalStorage();
         delete this.allNewsItems[id];
         this.#categoriesManager.updateCategories(Object.values(this.allNewsItems).flat(1));
+        console.log(this.allNewsItems);
     }
 
     #updateLocalStorage () {
