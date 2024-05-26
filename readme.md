@@ -12,7 +12,7 @@ For the proxy server, which is needed because of CORS, I went with node.js and e
 
 ## Running locally
 
-Assuming the NPM is installed:
+Assuming NPM is installed:
 
 1. clone the repository
 2. in the cloned directory, run ``` npm i ```
@@ -20,7 +20,7 @@ Assuming the NPM is installed:
 
 ## Notes
 
-When opening the deployed link, which I have mentioned above, the server might take some time to start up and respond
+When opening the deployed link, which I have mentioned above, the server might take some time to start up and respond.
 
 The news articles of different feeds are separated by a gap. Articles in each feed are sorted so that newer articles are displayed first.
 
