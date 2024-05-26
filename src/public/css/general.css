@@ -237,6 +237,16 @@ section.open .subheading::after {
     padding: 0 1.6rem;
 }
 
+.info-text {
+    display: none;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.info-text.visible {
+    display: block;
+}
+
 .news-items {
     display: grid;
     grid-template-columns: 1fr;
