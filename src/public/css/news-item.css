@@ -41,6 +41,7 @@
 }
 
 .news-item-description {
+    color: #475569;
     font-size: 1rem;
     font-weight: 400;
     overflow: hidden;
