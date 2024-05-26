@@ -135,7 +135,8 @@ body {
     border-bottom-right-radius: 0;
 }
 
-.filter-container {
+.filter-container,
+.rss-feeds-container {
     max-height: 4.5rem;
     border: 1px solid #EFF5FF;
     overflow: hidden;
@@ -144,9 +145,11 @@ body {
     border-radius: 5px;
 }
 
-.filter-container.open {
+.filter-container.open,
+.rss-feeds-container.open {
     max-height: 1000px;
 }
+
 
 
 section.open .subheading::after {

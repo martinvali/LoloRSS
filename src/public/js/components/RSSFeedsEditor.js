@@ -14,12 +14,17 @@ export default class RSSFeedsEditor {
         this.#feedsManager = feedsManager;
         this.#container.addEventListener("click", this.#containerClicked.bind(this));
         this.#highestId = Object.keys(this.#urls).length - 1;
+        container.parentElement.querySelector(".rss-feeds-text.subheading").addEventListener("click", this.#toggleRSSFeedsDropdown.bind(this));
     }
 
     get #nextId () {
         const nextHighestId = this.#highestId + 1
         this.#highestId += 1;
         return nextHighestId;
+    }
+
+    #toggleRSSFeedsDropdown () {
+        this.#container.parentElement.classList.toggle("open");
     }
 
     #containerClicked (e) {

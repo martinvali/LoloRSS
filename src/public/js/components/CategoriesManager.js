@@ -7,12 +7,9 @@ export default class CategoriesManager {
     constructor (container) {
         this.#container = container;
         this.#container.addEventListener("change", this.#filterCategoriesClicked.bind(this));
-        this.#container.parentElement.querySelector(".filter-categories-text")?.addEventListener("click", this.#openCategories.bind(this));
+        this.#container.parentElement.querySelector(".filter-categories-text")?.addEventListener("click", this.#toggleCategoriesDropdown.bind(this));
     }
 
-    #openCategories () {
-        this.#container.parentElement.classList.toggle("open");
-    }
 
     set feedsManager (feedsManager) {
         this.#feedsManager = feedsManager;
@@ -20,6 +17,10 @@ export default class CategoriesManager {
 
     updateCategories (allNewsItems) {
         this.#generateCategoriesFilters(allNewsItems);
+    }
+
+    #toggleCategoriesDropdown () {
+        this.#container.parentElement.classList.toggle("open");
     }
 
     #generateCategoriesFilters (allNewsItems) {
