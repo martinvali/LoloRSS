@@ -32,6 +32,11 @@ body {
 	background-color: #a7a7a7;
 }
 
+*:focus-visible {
+    outline: 1px solid #62C1BB;
+    outline-offset: -1px;
+}
+
 .header {
     padding: 0 1.6rem;
     margin-bottom: 1.5rem;
