@@ -5,6 +5,11 @@
     padding-bottom: 1.5rem;
     cursor: pointer;
     display: none;
+    transition: border 200ms;
+}
+
+.news-item:hover {
+    border: 1px solid #aaebe4;
 }
 
 .news-item.visible {

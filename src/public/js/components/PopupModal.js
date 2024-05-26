@@ -54,6 +54,8 @@ export default class PopupModal {
 
     #resetModuleToEmpty () {
         this.#content.innerHTML = "";
+        this.#mainHeading.innerText = "";
+        this.#mainImage.src = "";
     }
 
     #toggleLoading (isLoading) {
