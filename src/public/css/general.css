@@ -12,6 +12,7 @@ html {
 }
 
 body {
+    padding-top: 2rem;
     padding-bottom: 4rem;
 }
 
@@ -104,8 +105,7 @@ body {
     color: #62C1BB;
     background-color: rgba(98, 193, 187, 0.1);
     font-size: 1.2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    width: 5rem;
     transition: all 200ms;
 }
 
@@ -121,7 +121,6 @@ body {
 }
 
 .rss-feed-input-delete-button {
-    padding-left: 2rem;
     background-color: rgba(193, 98, 142, 0.1);
     background-image: url("/images/delete.svg");
     background-size: 40%;
@@ -156,7 +155,7 @@ body {
     max-height: 4.5rem;
     border: 1px solid #EFF5FF;
     overflow: hidden;
-    transition: max-height 200ms;
+    transition: all 200ms;
     padding: 1rem 2rem;
     border-radius: 5px;
 }
