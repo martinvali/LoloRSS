@@ -39,9 +39,13 @@ export default class RSSFeedsEditor {
         this.#feedUpdated(newValue, id);
     }
 
-    async #feedUpdated (newValue, id) {        
-        delete this.#urls[id];
-        this.#feedsManager.removeFeed(id, Object.values(this.#urls));
+    async #feedUpdated (newValue, id) {
+        this.#removeFeed(id);
+
+        console.log(this.#urls);
+        if(newValue === "") {
+            return this.#container.querySelector(`.rss-feed-input-container[data-id="${id}"`)?.remove();
+        }
 
         this.#urls[id] = newValue;
         document.body.classList.add("loading");
