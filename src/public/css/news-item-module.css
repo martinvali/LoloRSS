@@ -20,7 +20,7 @@
     width: 90%;
     height: 90vh;
     background-color: white;
-    border: 1px solid #EFF5FF;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     top: -200%;
     left: 50%;

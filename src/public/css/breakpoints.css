@@ -59,6 +59,29 @@
 }
 
 @media only screen and (min-width: 1500px) {
+
+    .header {
+        margin-bottom: 3rem;
+    }
+
+    .rss-feeds-container {
+        margin-bottom: 2.4rem;
+    }
+
+    .subheading {
+        font-size: 1.8rem;
+    }
+
+    .filter-category-label,
+    .rss-feed-input {
+        font-size: 1.5rem;
+    }
+
+    .rss-feed-button {
+        width: 6rem;
+        font-size: 1.6rem;
+    }
+
     .news-item-module {
         max-width: 900px;
     }

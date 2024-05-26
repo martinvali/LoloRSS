@@ -10,6 +10,7 @@
 
 html {
     --news-item-text-padding: 1.5rem;
+    --border-color: #ebf1f8;
 }
 
 body {
@@ -98,7 +99,7 @@ body {
 
 
 .rss-feed-button {
-    border: 1px solid #EFF5FF;
+    border: 1px solid var(--border-color);
     border-left: none;
     cursor: pointer;
     border-top-right-radius: 5px;
@@ -142,7 +143,7 @@ body {
 
 .rss-feed-input {
     width: 100%;
-    border: 1px solid #EFF5FF;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     padding: 0.6rem;
     font-size: 1.2rem;
@@ -154,7 +155,7 @@ body {
 .filter-container,
 .rss-feeds-container {
     max-height: 4.9rem;
-    border: 1px solid #EFF5FF;
+    border: 1px solid var(--border-color);
     overflow: hidden;
     transition: all 50ms;
     padding: 1.2rem 2rem;
@@ -185,7 +186,7 @@ section.open .subheading::after {
 }
 
 .filter-category-input {
-    border: 1px solid #EFF5FF;
+    border: 1px solid var(--border-color);
     position: absolute;
     left: 0;
     top: 0;
@@ -194,7 +195,7 @@ section.open .subheading::after {
 
 .filter-category-input + label::before {
     box-sizing: border-box;
-    border: 1px solid #EFF5FF;
+    border: 1px solid var(--border-color);
     border-radius: 3px;
 	content: "";
 	height: 1.7rem;
