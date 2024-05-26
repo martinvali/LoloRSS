@@ -42,6 +42,11 @@
         font-size: 1.4rem;
     }
 
+    .filter-category-label,
+    .rss-feed-input {
+        font-size: 1.4rem;
+    }
+
     .news-item-module h2:not(.news-item-module-heading),
     .news-item-module h3,
     .news-item-module h4,
@@ -50,5 +55,11 @@
     .news-item-module p:has(strong) {
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .news-item-module {
+        max-width: 900px;
     }
 }
