@@ -7,6 +7,11 @@ export default class CategoriesManager {
     constructor (container) {
         this.#container = container;
         this.#container.addEventListener("change", this.#filterCategoriesClicked.bind(this));
+        this.#container.parentElement.querySelector(".filter-categories-text")?.addEventListener("click", this.#openCategories.bind(this));
+    }
+
+    #openCategories () {
+        this.#container.parentElement.classList.toggle("open");
     }
 
     set feedsManager (feedsManager) {

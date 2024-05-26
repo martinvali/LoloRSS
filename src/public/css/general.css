@@ -51,10 +51,30 @@ body {
     gap: 1.2rem;
 }
 
+
 .subheading {
+    display: inline-block;
     font-weight: 500;
     font-size: 1.6rem;
     margin-bottom: 1rem;
+    cursor: pointer;
+    position: relative;
+    padding-right: 1.8rem;
+}
+
+.subheading::after {
+    content: "";
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    background-image: url("/images/arrow.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 200ms;
 }
 
 
@@ -113,6 +133,24 @@ body {
     border-right: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+.filter-container {
+    max-height: 4.5rem;
+    border: 1px solid #EFF5FF;
+    overflow: hidden;
+    transition: max-height 200ms;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+}
+
+.filter-container.open {
+    max-height: 1000px;
+}
+
+
+section.open .subheading::after {
+    transform: translateY(-50%) rotateZ(180deg);
 }
 
 .filter-category-container {
