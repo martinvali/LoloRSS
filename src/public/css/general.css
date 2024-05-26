@@ -241,6 +241,7 @@ section.open .subheading::after {
     display: none;
     font-size: 2rem;
     text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 .info-text.visible {

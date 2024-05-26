@@ -41,10 +41,9 @@ export default class RSSFeedsManager {
     }
 
     #toggleInfoText () {
-        console.log(Object.values(this.allNewsItems).flat(1));
         if(Object.values(this.allNewsItems).flat(1).length === 0) {
             this.#infoText.classList.add("visible");
-            this.#infoText.innerText = "Currently there are not valid RSS feeds.";
+            this.#infoText.innerText = "Currently there are no valid RSS feeds.";
         }
         else this.#infoText.classList.remove("visible");
     }
@@ -58,7 +57,6 @@ export default class RSSFeedsManager {
 
         document.body.classList.add("loading");
 
-
         for (const xmlDocument of xmlDocuments) {
             const newsFeedContainer = document.createElement("ul");
             newsFeedContainer.dataset.id = id;
@@ -67,7 +65,11 @@ export default class RSSFeedsManager {
             const newsFeedItems = [];
             const newsItems = xmlDocument.getElementsByTagName("item");
             
-            if(newsItems.length === 0) continue;
+            if(newsItems.length === 0) {
+                this.allNewsItems[id] = newsFeedItems;
+                id++;
+                continue;
+            }
 
             for (let i = 0; i < newsItems?.length; i++) {
                 const newsItemData = newsItems[i];
