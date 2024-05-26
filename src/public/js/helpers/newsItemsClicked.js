@@ -8,8 +8,9 @@ export default async function newsItemsClicked (e, modal) {
     const url = newsItem.dataset.url;
 
     modal.showLoading(url);
-    const data = await freeNewsItemFromClutter(url);
     
-    if(!modal.isVisible) return;
+    const data = await freeNewsItemFromClutter(url, modal).catch((err) => console.log(err));
+    
+    if(!data) return;
     modal.showContent(data);
 }

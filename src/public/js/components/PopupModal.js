@@ -3,7 +3,7 @@ export default class PopupModal {
     #mainImage;
     #content;
     #mainHeading;
-    isVisible = false;
+    abortController;
 
     constructor (container) {
         this.#container = container;
@@ -16,7 +16,6 @@ export default class PopupModal {
     }
 
     showLoading () {
-        this.isVisible = true;
         this.#resetModuleToEmpty();
         document.querySelector("html").style.overflowY = "hidden";
         this.#toggleVisibility(true);
@@ -24,7 +23,6 @@ export default class PopupModal {
 
 
     showContent (data) {
-        this.isVisible = true;
         if(data.error || !data.content) return this.#showErrorContent();
 
         const content = data?.content;
@@ -52,7 +50,6 @@ export default class PopupModal {
         this.#mainImage.src = "";
         this.#mainHeading.innerText = "";
         document.querySelector("html").style.overflowY = "visible";
-        this.isVisible = false;
     }
 
     #resetModuleToEmpty () {
