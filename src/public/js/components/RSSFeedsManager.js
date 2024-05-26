@@ -22,7 +22,6 @@ export default class RSSFeedsManager {
         this.#generateNewsArticles(xmlArticles, id);
         this.#categoriesManager.updateCategories(Object.values(this.allNewsItems).flat(1));
 
-        localStorage.setItem("feeds", JSON.stringify(this.#feedurls));
         this.#updateLocalStorage();
     }
 
@@ -32,7 +31,6 @@ export default class RSSFeedsManager {
         this.#updateLocalStorage();
         delete this.allNewsItems[id];
         this.#categoriesManager.updateCategories(Object.values(this.allNewsItems).flat(1));
-        console.log(this.allNewsItems);
     }
 
     #updateLocalStorage () {

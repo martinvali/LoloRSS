@@ -15,12 +15,39 @@ export default class RSSFeedsEditor {
         this.#container.addEventListener("click", this.#containerClicked.bind(this));
         this.#highestId = Object.keys(this.#urls).length - 1;
         container.parentElement.querySelector(".rss-feeds-text.subheading").addEventListener("click", this.#toggleRSSFeedsDropdown.bind(this));
+        container.addEventListener("focusout", this.#lostFocusDetected.bind(this));
     }
 
     get #nextId () {
         const nextHighestId = this.#highestId + 1
         this.#highestId += 1;
         return nextHighestId;
+    }
+
+    #lostFocusDetected (e) {
+        const target = e?.target;
+
+        if (!target.matches(".rss-feed-input:not(.add-new-rss-feed-input)")) return;
+        
+        const id = target.parentElement.dataset.id;
+
+        const newValue = target.value;
+        const previousValue = this.#urls[id];
+
+        if(newValue === previousValue) return;
+        
+        this.#feedUpdated(newValue, id);
+    }
+
+    async #feedUpdated (newValue, id) {        
+        delete this.#urls[id];
+        this.#feedsManager.removeFeed(id, Object.values(this.#urls));
+
+        this.#urls[id] = newValue;
+        document.body.classList.add("loading");
+        await this.#feedsManager.addFeeds([newValue], id);
+        document.body.classList.remove("loading");
+    
     }
 
     #toggleRSSFeedsDropdown () {
@@ -73,7 +100,6 @@ export default class RSSFeedsEditor {
         const id = this.#nextId;
         this.#urls[id] = url;
 
-        console.log(this.#urls);
         this.#displayNewFeed(url, id);
         document.body.classList.add("loading");
         await this.#feedsManager.addFeeds([url], id);
