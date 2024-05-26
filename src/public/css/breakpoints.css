@@ -74,7 +74,7 @@
 
     .filter-category-label,
     .rss-feed-input {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     .rss-feed-button {
@@ -85,4 +85,35 @@
     .news-item-module {
         max-width: 900px;
     }
+
+    .news-item-module * {
+        font-size: 1.5rem;
+    }
+
+    .news-item-module h2:not(.news-item-module-heading),
+    .news-item-module h3,
+    .news-item-module h4,
+    .news-item-module h5,
+    .news-item-module h6,
+    .news-item-module p:has(strong) {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    }
+
+    .news-item-module .news-item-module-close-button {
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .news-item-module .image-skeleton {
+        height: 400px;
+        margin-bottom: 2rem;
+    }
+
+    .news-item-module .skeleton.heading-skeleton {
+        height: 30px;
+    }
+    
 }
