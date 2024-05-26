@@ -70,6 +70,7 @@
 
     .subheading {
         font-size: 1.8rem;
+        max-height: 5.4rem;
     }
 
     .filter-category-label,
@@ -88,6 +89,11 @@
 
     .news-item-module * {
         font-size: 1.5rem;
+    }
+
+    .news-item-module img {
+        margin-bottom: 2.5rem;
+        margin-top: 2.5em;
     }
 
     .news-item-module h2:not(.news-item-module-heading),
@@ -114,6 +120,27 @@
 
     .news-item-module .skeleton.heading-skeleton {
         height: 30px;
+    }
+    
+    .news-feed-container {
+        gap: 3rem;
+    }
+
+    .news-item {
+        padding-bottom: 2.4rem;
+    }
+
+    .news-item-title {
+        font-size: 1.8rem;
+    }
+
+    .news-item-date,
+    .news-item-description {
+        font-size: 1.4rem;
+    }
+
+    html {
+        --news-item-text-padding: 2.5rem;
     }
     
 }
