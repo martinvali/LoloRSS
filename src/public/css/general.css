@@ -32,7 +32,6 @@ body {
 	background-color: #a7a7a7;
 }
 
-
 .header {
     padding: 0 1.6rem;
     margin-bottom: 1.5rem;
@@ -102,6 +101,18 @@ body {
     font-size: 1.2rem;
     padding-left: 1rem;
     padding-right: 1rem;
+    transition: all 200ms;
+}
+
+.rss-feed-input-delete-button:hover,
+.rss-feed-input-delete-button:active {
+    background-color: rgba(193, 98, 142, 0.3);
+}
+
+.add-new-rss-feed-button:hover,
+.add-new-rss-feed-button:active {
+    background-color: #62C1BB;
+    color: white;
 }
 
 .rss-feed-input-delete-button {
